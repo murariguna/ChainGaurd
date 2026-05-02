@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChainGuard — Decentralized Threat Intelligence for SOCs</title>
+  <meta name="description" content="ChainGuard: a Hyperledger Fabric–powered platform for secure, real-time threat intelligence sharing across Security Operations Centers." />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="scanline"></div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">⛓</span>
+      <span class="brand-name">Chain<span class="accent">Guard</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="threats.html" class="active">Threat Feed</a>
+      <a href="network.html">Network</a>
+      <a href="profile.html">Profile</a>
+      <a href="about.html">About</a> 
+      <a href="settings.html">Settings</a>
+    </nav>
+    <button class="hamburger" aria-label="menu">☰</button>
+  </header>
+  <section class="page-head">
+    <div><h1>Threat <span class="accent">Intelligence Feed</span></h1>
+    <p class="lede">All sanitized IoCs committed to the ledger across the federation.</p></div>
+  </section>
+
+  <section class="filters">
+    <input id="search" type="text" placeholder="🔍 Search by indicator, hash, domain..." />
+    <select id="filter-type"><option value="">All Types</option><option>IP</option><option>Hash</option><option>Domain</option><option>URL</option></select>
+    <select id="filter-sev"><option value="">All Severities</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select>
+  </section>
+
+  <section class="threat-grid" id="threat-grid"></section>
+
+  <footer class="footer mini"><p>© 2026 ChainGuard</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>

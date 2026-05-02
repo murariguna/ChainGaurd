@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChainGuard — Decentralized Threat Intelligence for SOCs</title>
+  <meta name="description" content="ChainGuard: a Hyperledger Fabric–powered platform for secure, real-time threat intelligence sharing across Security Operations Centers." />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="scanline"></div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">⛓</span>
+      <span class="brand-name">Chain<span class="accent">Guard</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="threats.html">Threat Feed</a>
+      <a href="network.html">Network</a>
+      <a href="profile.html">Profile</a>
+      <a href="about.html"  class="active">About</a> 
+      <a href="settings.html">Settings</a>
+    </nav>
+    <button class="hamburger" aria-label="menu">☰</button>
+
+  </header>
+
+  <section class="page-head">
+    <div><h1>About <span class="accent">ChainGuard</span></h1>
+    <p class="lede">A senior research project re-imagining how SOCs collaborate.</p></div>
+  </section>
+
+  <section class="about-grid">
+    <div class="card">
+      <h3>The Problem</h3>
+      <p>Modern SOCs work in isolation. When one organization detects a malicious IP, others remain blind until they're attacked themselves. Centralized threat-intel platforms create trust bottlenecks and stale data.</p>
+    </div>
+    <div class="card">
+      <h3>The Solution</h3>
+      <p>A permissioned Hyperledger Fabric network where every SOC is a peer. IoCs are sanitized, signed, and committed via chaincode — propagated to all members within seconds.</p>
+    </div>
+    <div class="card">
+      <h3>Tech Stack</h3>
+      <ul class="tech">
+        <li>Hyperledger Fabric — Permissioned blockchain</li>
+        <li>Chaincode (Go / Node.js) — Smart contract logic</li>
+        <li>Python 3 — Node agents (detect &amp; listen)</li>
+        <li>Flask — Optional REST gateway</li>
+        <li>SQLite — Local cache</li>
+        <li>Docker + Compose — Deployment</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Pyramid of Pain</h3>
+      <div class="pyramid">
+        <div class="p p1">TTPs <span>tough</span></div>
+        <div class="p p2">Tools</div>
+        <div class="p p3">Network/Host Artifacts</div>
+        <div class="p p4">Domains</div>
+        <div class="p p5">IP Addresses</div>
+        <div class="p p6">Hash Values <span>easy</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="timeline-wrap">
+    <h2 class="section-title">Project <span class="accent">Timeline</span></h2>
+    <ol class="timeline">
+      <li><h4>Week 1</h4><p>Research &amp; architecture design</p></li>
+      <li><h4>Week 2</h4><p>Hyperledger Fabric setup</p></li>
+      <li><h4>Week 3</h4><p>Chaincode development</p></li>
+      <li><h4>Week 4</h4><p>Python agent development</p></li>
+      <li><h4>Week 5</h4><p>Integration &amp; testing</p></li>
+      <li><h4>Week 6</h4><p>Final demo &amp; documentation</p></li>
+    </ol>
+  </section>
+
+  <section class="cta-band">
+    <div><h2>Built by Satya Murari Guna</h2><p>SAGI RAMA KRISHNAM RAJU ENGINEERING COLLEGE · CSE-CIC · ID 23B91A4737</p></div>
+    <a href="dashboard.html" class="btn btn-primary">See it Live →</a>
+  </section>
+
+  <footer class="footer mini"><p>© 2026 ChainGuard</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>

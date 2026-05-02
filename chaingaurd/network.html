@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChainGuard — Decentralized Threat Intelligence for SOCs</title>
+  <meta name="description" content="ChainGuard: a Hyperledger Fabric–powered platform for secure, real-time threat intelligence sharing across Security Operations Centers." />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="scanline"></div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">⛓</span>
+      <span class="brand-name">Chain<span class="accent">Guard</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="threats.html">Threat Feed</a>
+      <a href="network.html"  class="active">Network</a>
+      <a href="profile.html">Profile</a>
+      <a href="about.html">About</a> 
+      <a href="settings.html">Settings</a>
+    </nav>
+    <button class="hamburger" aria-label="menu">☰</button>
+  </header>
+  <section class="page-head">
+    <div><h1>Federation <span class="accent">Network</span></h1>
+    <p class="lede">38 permissioned SOC nodes. Hyperledger Fabric · Raft consensus.</p></div>
+  </section>
+
+  <section class="net-wrap">
+    <div class="card net-canvas">
+      <canvas id="net-canvas"></canvas>
+    </div>
+    <div class="card">
+      <h3>Peer Nodes</h3>
+      <ul class="node-list" id="node-list"></ul>
+    </div>
+  </section>
+
+  <footer class="footer mini"><p>© 2026 ChainGuard</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>

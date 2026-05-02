@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings — ChainGuard</title>
+  <meta name="description" content="Configure your ChainGuard SOC node, alerts, integrations, and security preferences." />
+  <link rel="icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .settings-wrap{display:grid;grid-template-columns:240px 1fr;gap:1.5rem;max-width:1280px;margin:0 auto;padding:0 2rem 4rem}
+    .settings-nav{position:sticky;top:90px;align-self:start;display:flex;flex-direction:column;gap:.25rem}
+    .settings-nav a{padding:.7rem 1rem;border-radius:10px;color:var(--muted);font-size:.92rem;border-left:2px solid transparent;font-family:var(--mono)}
+    .settings-nav a:hover{color:var(--text);background:var(--surface)}
+    .settings-nav a.active{color:var(--cyan);background:var(--surface);border-left-color:var(--cyan)}
+    .settings-main{display:flex;flex-direction:column;gap:1.5rem}
+    .setting-section h3{display:flex;align-items:center;gap:.6rem;margin-bottom:.3rem;font-size:1.15rem}
+    .setting-section h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+    .setting-section > p.muted{margin-bottom:1.2rem;font-size:.88rem}
+    .setting-row{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-bottom:1px solid var(--line-2);gap:1.5rem}
+    .setting-row:last-child{border-bottom:0}
+    .setting-row .label strong{display:block;font-size:.95rem;margin-bottom:.2rem}
+    .setting-row .label span{color:var(--muted);font-size:.82rem}
+    .toggle{position:relative;width:46px;height:24px;background:var(--surface-2);border:1px solid var(--line);border-radius:99px;cursor:pointer;flex-shrink:0;transition:all .25s}
+    .toggle::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:var(--muted);transition:all .25s}
+    .toggle.on{background:rgba(94,234,212,0.15);border-color:var(--cyan)}
+    .toggle.on::after{left:24px;background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+    .field{display:flex;flex-direction:column;gap:.4rem;flex:1;max-width:320px}
+    .field label{font-size:.78rem;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em}
+    .field input,.field select,.field textarea{background:var(--bg-2);border:1px solid var(--line);color:var(--text);padding:.7rem .9rem;border-radius:10px;font-family:var(--mono);font-size:.88rem;outline:none;transition:border-color .2s}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(94,234,212,0.1)}
+    .danger-zone{border:1px solid rgba(255,91,107,0.3);border-radius:var(--radius);padding:1.5rem;background:rgba(255,91,107,0.04)}
+    .danger-zone h3{color:var(--red)}
+    .danger-zone h3 .dot{background:var(--red);box-shadow:0 0 10px var(--red)}
+    .btn-danger{background:transparent;border:1px solid var(--red);color:var(--red);padding:.6rem 1.1rem;border-radius:10px;font-family:var(--mono);font-size:.85rem;transition:all .2s}
+    .btn-danger:hover{background:var(--red);color:var(--bg)}
+    .save-bar{position:sticky;bottom:1rem;background:var(--surface);border:1px solid var(--cyan);border-radius:var(--radius);padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--glow)}
+    .save-bar span{font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+    @media (max-width:880px){.settings-wrap{grid-template-columns:1fr;padding:0 1rem 3rem}.settings-nav{position:static;flex-direction:row;overflow-x:auto;padding-bottom:.5rem}}
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <header class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">⛓</span>
+      <span class="brand-name">Chain<span class="accent">Guard</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" >Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="threats.html">Threat Feed</a>
+      <a href="network.html">Network</a>
+      <a href="profile.html">Profile</a>
+      <a href="about.html">About</a> 
+      <a href="settings.html" class="active">Settings</a>
+    </nav>
+    <button class="hamburger" aria-label="menu">☰</button>
+  </header>
+
+  <section class="page-head">
+    <div>
+      <h1>Node <span class="accent">Settings</span></h1>
+      <p class="lede">Configure peer behavior, alerts, integrations, and security policies.</p>
+    </div>
+  </section>
+
+  <div class="settings-wrap">
+    <aside class="settings-nav">
+      <a href="#general" class="active">› General</a>
+      <a href="#node">› Node &amp; Ledger</a>
+      <a href="#alerts">› Alerts</a>
+      <a href="#integrations">› Integrations</a>
+      <a href="#security">› Security</a>
+      <a href="#appearance">› Appearance</a>
+      <a href="#danger">› Danger Zone</a>
+    </aside>
+
+    <main class="settings-main">
+
+      <div class="card setting-section" id="general">
+        <h3><span class="dot"></span>General</h3>
+        <p class="muted">Basic information about your SOC node operator.</p>
+        <div class="setting-row">
+          <div class="label"><strong>Display Name</strong><span>Shown to other federation peers in audit logs.</span></div>
+          <div class="field"><label>Name</label><input type="text" value="Satya Murari Guna" /></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Organization</strong><span>Your registered SOC entity.</span></div>
+          <div class="field"><label>Org</label><input type="text" value="SAGI RAMA KRISHNAM RAJU EC" /></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Timezone</strong><span>Used for ledger timestamps in the UI.</span></div>
+          <div class="field"><label>TZ</label>
+            <select><option>Asia/Kolkata (UTC+5:30)</option><option>UTC</option><option>America/New_York</option><option>Europe/London</option></select>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Language</strong><span>Interface language preference.</span></div>
+          <div class="field"><label>Lang</label>
+            <select><option>English (US)</option><option>हिन्दी</option><option>Español</option><option>Deutsch</option></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card setting-section" id="node">
+        <h3><span class="dot"></span>Node &amp; Ledger</h3>
+        <p class="muted">Hyperledger Fabric peer configuration.</p>
+        <div class="setting-row">
+          <div class="label"><strong>Auto-broadcast IoCs</strong><span>Sign and push validated indicators to peers automatically.</span></div>
+          <div class="toggle on" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Auto-pull from Federation</strong><span>Subscribe to all incoming IoCs in real time.</span></div>
+          <div class="toggle on" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Stale IoC TTL</strong><span>Auto-purge indicators older than the threshold.</span></div>
+          <div class="field"><label>Days</label>
+            <select><option>30 days</option><option>60 days</option><option>90 days</option><option>Never</option></select>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Channel</strong><span>The ledger channel this peer is bound to.</span></div>
+          <div class="field"><label>Channel</label><input type="text" value="chainguard-mainnet" readonly /></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Min severity to commit</strong><span>Reject submissions below this severity.</span></div>
+          <div class="field"><label>Severity</label>
+            <select><option>Low</option><option selected>Medium</option><option>High</option><option>Critical</option></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="card setting-section" id="alerts">
+        <h3><span class="dot"></span>Alerts &amp; Notifications</h3>
+        <p class="muted">How and where you receive threat alerts.</p>
+        <div class="setting-row">
+          <div class="label"><strong>Critical alerts</strong><span>Push notification + sound for CRITICAL IoCs.</span></div>
+          <div class="toggle on" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Email digest</strong><span>Daily 09:00 IST summary of new indicators.</span></div>
+          <div class="toggle on" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Slack webhook</strong><span>Forward HIGH+ alerts to your team channel.</span></div>
+          <div class="toggle" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Webhook URL</strong><span>POST endpoint for outbound alerts.</span></div>
+          <div class="field"><label>URL</label><input type="text" placeholder="https://hooks.slack.com/..." /></div>
+        </div>
+      </div>
+
+      <div class="card setting-section" id="integrations">
+        <h3><span class="dot"></span>Integrations</h3>
+        <p class="muted">Push IoCs directly into your security stack.</p>
+        <div class="setting-row">
+          <div class="label"><strong>Firewall (pfSense)</strong><span>Auto-block malicious IPs at the perimeter.</span></div>
+          <div class="toggle on" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>DNS Sinkhole (Pi-hole)</strong><span>Resolve malicious domains to a sinkhole.</span></div>
+          <div class="toggle on" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>SIEM (Wazuh)</strong><span>Stream all IoC events to your SIEM.</span></div>
+          <div class="toggle" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>MISP Sync</strong><span>Two-way sync with your MISP instance.</span></div>
+          <div class="toggle" data-toggle></div>
+        </div>
+      </div>
+
+      <div class="card setting-section" id="security">
+        <h3><span class="dot"></span>Security</h3>
+        <p class="muted">Authentication and key management.</p>
+        <div class="setting-row">
+          <div class="label"><strong>Two-Factor Authentication</strong><span>TOTP via authenticator app. Required for admins.</span></div>
+          <div class="toggle on" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Hardware Key (FIDO2)</strong><span>Bind a YubiKey for chaincode signing.</span></div>
+          <div class="toggle" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Session timeout</strong><span>Auto-logout after inactivity.</span></div>
+          <div class="field"><label>Minutes</label>
+            <select><option>15 minutes</option><option selected>30 minutes</option><option>1 hour</option><option>4 hours</option></select>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Rotate signing keys</strong><span>Generate a new keypair for this peer.</span></div>
+          <button class="btn btn-ghost">Rotate now</button>
+        </div>
+      </div>
+
+      <div class="card setting-section" id="appearance">
+        <h3><span class="dot"></span>Appearance</h3>
+        <p class="muted">Customize how the SOC console looks.</p>
+        <div class="setting-row">
+          <div class="label"><strong>Theme</strong><span>Dark cyber is the only true theme. ☻</span></div>
+          <div class="field"><label>Theme</label>
+            <select><option>Dark Cyber (default)</option><option>Midnight</option><option>Hacker Green</option></select>
+          </div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Reduce motion</strong><span>Disable terminal typewriter, beams, and grid drift.</span></div>
+          <div class="toggle" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Compact tables</strong><span>Tighter row spacing on dashboard tables.</span></div>
+          <div class="toggle" data-toggle></div>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Sound effects</strong><span>Subtle clicks on new IoC arrivals.</span></div>
+          <div class="toggle on" data-toggle></div>
+        </div>
+      </div>
+
+      <div class="danger-zone setting-section" id="danger">
+        <h3><span class="dot"></span>Danger Zone</h3>
+        <p class="muted">Irreversible operations. Proceed with caution.</p>
+        <div class="setting-row">
+          <div class="label"><strong>Leave Federation</strong><span>Disconnect this peer from the chainguard-mainnet channel.</span></div>
+          <button class="btn-danger">Leave channel</button>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Purge local cache</strong><span>Wipe cached IoCs. Ledger remains intact.</span></div>
+          <button class="btn-danger">Purge cache</button>
+        </div>
+        <div class="setting-row">
+          <div class="label"><strong>Decommission node</strong><span>Permanently revoke this peer's MSP certificate.</span></div>
+          <button class="btn-danger">Decommission</button>
+        </div>
+      </div>
+
+      <div class="save-bar">
+        <span>● Unsaved changes will be lost</span>
+        <div style="display:flex;gap:.6rem">
+          <button class="btn btn-ghost" onclick="resetSettings()">Discard</button>
+          <button class="btn btn-primary" onclick="saveSettings()">Save Changes</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <footer class="footer mini"><p>© 2026 ChainGuard</p></footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Toggle switches
+    document.querySelectorAll('[data-toggle]').forEach(t => {
+      t.addEventListener('click', () => t.classList.toggle('on'));
+    });
+    // Side nav active state on scroll
+    const navLinks = document.querySelectorAll('.settings-nav a');
+    const sections = [...document.querySelectorAll('.setting-section')];
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY + 140;
+      let active = sections[0].id;
+      sections.forEach(s => { if (s.offsetTop <= y) active = s.id; });
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active));
+    });
+    function saveSettings(){ if(window.toast) toast('✓ Settings saved & signed to ledger'); }
+    function resetSettings(){ if(window.toast) toast('↺ Changes discarded'); }
+  </script>
+</body>
+</html>

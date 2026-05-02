@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChainGuard — Decentralized Threat Intelligence for SOCs</title>
+  <meta name="description" content="ChainGuard: a Hyperledger Fabric–powered platform for secure, real-time threat intelligence sharing across Security Operations Centers." />
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="scanline"></div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">⛓</span>
+      <span class="brand-name">Chain<span class="accent">Guard</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="threats.html">Threat Feed</a>
+      <a href="network.html">Network</a>
+      <a href="profile.html">Profile</a>
+      <a href="about.html">About</a> 
+      <a href="settings.html">Settings</a>
+    </nav>
+    <button class="hamburger" aria-label="menu">☰</button>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <div class="badge">
+        <span class="dot"></span> Hyperledger Fabric · Permissioned Network
+      </div>
+      <h1>Decentralized Threat Intelligence<br/><span class="grad">For Modern SOCs.</span></h1>
+      <p class="lede">
+        ChainGuard turns isolated Security Operations Centers into a federated defense grid.
+        Share Indicators of Compromise across organizations in real-time — verified by
+        blockchain, immutable by design.
+      </p>
+      <div class="cta-row">
+        <a href="dashboard.html" class="btn btn-primary">Open Dashboard →</a>
+        <a href="about.html" class="btn btn-ghost">How it works</a>
+      </div>
+      <div class="stats">
+        <div><strong id="stat-iocs">12,847</strong><span>IoCs Shared</span></div>
+        <div><strong id="stat-nodes">38</strong><span>SOC Nodes</span></div>
+        <div><strong id="stat-blocks">94,201</strong><span>Blocks Mined</span></div>
+        <div><strong>&lt; 2s</strong><span>Avg. Propagation</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="terminal">
+        <div class="term-bar">
+          <span></span><span></span><span></span>
+          <p>node-a@chainguard ~ </p>
+        </div>
+        <div class="term-body" id="terminal"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features" id="features">
+    <h2 class="section-title">Why <span class="accent">ChainGuard</span></h2>
+    <p class="section-sub">Built to break the silos. Designed for trust.</p>
+    <div class="feature-grid">
+      <div class="card">
+        <div class="ico">🛡️</div>
+        <h3>Immutable Ledger</h3>
+        <p>Every IoC submission is cryptographically sealed via chaincode — tamper-proof, auditable, forever.</p>
+      </div>
+      <div class="card">
+        <div class="ico">⚡</div>
+        <h3>Real-Time Propagation</h3>
+        <p>New threats reach every node in under 2 seconds. No waiting on vendor feeds or weekly digests.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🔗</div>
+        <h3>Permissioned Trust</h3>
+        <p>Only verified SOCs join the channel. No anonymous noise — only intelligence you can act on.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🤖</div>
+        <h3>Automated Response</h3>
+        <p>Python agents listen, validate, and trigger firewall, EDR, and SIEM actions automatically.</p>
+      </div>
+      <div class="card">
+        <div class="ico">📊</div>
+        <h3>Pyramid of Pain</h3>
+        <p>Track IoCs by attacker-effort: hashes, IPs, domains, TTPs — all categorized and prioritized.</p>
+      </div>
+      <div class="card">
+        <div class="ico">🌐</div>
+        <h3>Federated by Design</h3>
+        <p>No central authority. No single point of failure. Sovereignty stays with each organization.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section class="arch">
+    <h2 class="section-title">Architecture <span class="accent">Flow</span></h2>
+    <div class="flow">
+      <div class="flow-node"><span class="num">01</span><h4>Detect</h4><p>Node A SIEM/EDR detects malicious activity</p></div>
+      <div class="arrow">→</div>
+      <div class="flow-node"><span class="num">02</span><h4>Sanitize</h4><p>Python agent generates structured IoC</p></div>
+      <div class="arrow">→</div>
+      <div class="flow-node"><span class="num">03</span><h4>Submit</h4><p>Chaincode validates & writes to ledger</p></div>
+      <div class="arrow">→</div>
+      <div class="flow-node"><span class="num">04</span><h4>Propagate</h4><p>All peer nodes receive consensus update</p></div>
+      <div class="arrow">→</div>
+      <div class="flow-node"><span class="num">05</span><h4>Respond</h4><p>Node B agents trigger automated defense</p></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div>
+      <h2>Stop fighting alone.</h2>
+      <p>Join the federated defense grid. Open the live SOC dashboard now.</p>
+    </div>
+    <a href="dashboard.html" class="btn btn-primary">Enter Dashboard →</a>
+  </section>
+
+  <footer class="footer">
+    <div>
+      <span class="brand-mark">⛓</span>
+      <strong>ChainGuard</strong>
+      <p>Blockchain-Based Threat Intelligence Sharing for SOC Environments</p>
+    </div>
+    <div class="foot-cols">
+      <div><h5>Product</h5><a href="dashboard.html">Dashboard</a><a href="threats.html">Threat Feed</a><a href="network.html">Network</a></div>
+      <div><h5>Account</h5><a href="profile.html">Profile</a><a href="settings.html">Settings</a></div>
+      <div><h5>Project</h5><a href="about.html">About</a><a href="#">Docs</a><a href="#">GitHub</a></div>
+    </div>
+    <p class="copyright">© 2026 ChainGuard · Satya Murari Guna </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

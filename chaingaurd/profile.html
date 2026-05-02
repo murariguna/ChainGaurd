@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile — ChainGuard</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<header class="nav">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">⛓</span>
+    <span class="brand-name">Chain<span class="accent">Guard</span></span>
+  </a>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="threats.html">Threat Feed</a>
+    <a href="network.html">Network</a>
+    <a href="profile.html" class="active">Profile</a>
+    <a href="about.html">About</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+</header>
+
+<!-- LOGIN SECTION -->
+<section id="login-section" class="profile-wrap" 
+style="display:flex; justify-content:center;">  <div class="card" style="max-width:400px; width:100%;">
+    <center><h2 style="margin-bottom:1rem;">SOC Login</h2></center>
+
+    <form onsubmit="login(event)" class="form">
+      <label>Node ID
+        <input type="text" id="nodeId" placeholder="SOC-Node-A" required />
+      </label>
+
+      <label>Access Key
+        <input type="password" id="password" placeholder="••••••••" required />
+      </label>
+
+      <button class="btn btn-primary" type="submit">Login</button>
+    </form>
+  </div>
+</section>
+
+<!-- PROFILE SECTION -->
+<section id="profile-section" class="profile-wrap" style="display:none;">
+
+  <div class="card profile-card">
+    <div class="avatar">SG</div>
+    <h2>Satya Murari Guna</h2>
+    <p class="muted">Lead SOC Analyst · Node-A Operator</p>
+
+    <div class="chips">
+      <span class="chip ok">● Verified Peer</span>
+      <span class="chip">Hyperledger Admin</span>
+      <span class="chip">Chaincode Dev</span>
+    </div>
+
+    <dl class="meta">
+      <dt>Organization</dt><dd>SRKR Engineering College</dd>
+      <dt>Department</dt><dd>CSE — CIC</dd>
+      <dt>Node ID</dt><dd><code id="node-display"></code></dd>
+      <dt>MSP</dt><dd><code>NodeAMSP</code></dd>
+      <dt>Joined</dt><dd>March 12, 2026</dd>
+    </dl>
+
+    <button class="btn btn-ghost" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="profile-side">
+
+    <div class="card">
+      <h3>Activity Summary</h3>
+      <div class="kpi-row">
+        <div><strong>284</strong><span>IoCs Submitted</span></div>
+        <div><strong>1,902</strong><span>IoCs Consumed</span></div>
+        <div><strong>96</strong><span>Threats Blocked</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>API Credentials</h3>
+      <div class="cred">
+        <label>Public Key</label>
+        <code>0x7f3a...c821e9b4</code>
+      </div>
+      <button class="btn btn-ghost">Rotate Keys</button>
+    </div>
+
+    <div class="card">
+      <h3>Recent Submissions</h3>
+      <ul class="ioc-list compact" id="profile-iocs"></ul>
+    </div>
+
+  </div>
+</section>
+
+<footer class="footer mini">
+  <p>© 2026 ChainGuard</p>
+</footer>
+
+<script>
+  // Check login state
+  window.onload = () => {
+    const node = localStorage.getItem("chainguard_node");
+    if (node) showProfile(node);
+  };
+
+  function login(e) {
+    e.preventDefault();
+
+    const nodeId = document.getElementById("nodeId").value;
+    const password = document.getElementById("password").value;
+
+    // simple demo auth
+    if (nodeId && password.length >= 4) {
+      localStorage.setItem("chainguard_node", nodeId);
+      showProfile(nodeId);
+    } else {
+      alert("Invalid credentials");
+    }
+  }
+
+  function showProfile(node) {
+    document.getElementById("login-section").style.display = "none";
+    document.getElementById("profile-section").style.display = "grid";
+    document.getElementById("node-display").textContent = node;
+  }
+
+  function logout() {
+    localStorage.removeItem("chainguard_node");
+    location.reload();
+  }
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
